@@ -33,15 +33,17 @@ def build_model(input_shape, num_classes):
     x = layers.Conv1D(128, kernel_size=8, padding='same', activation='relu')(x)
     x = layers.BatchNormalization()(x)
     x = layers.MaxPooling1D(pool_size=2)(x)
-    x = layers.Dropout(0.3) # Ayuda a no memorizar ruido AWGN
+    
+    # CORRECCIÓN AQUÍ: Faltaba el (x) al final
+    x = layers.Dropout(0.3)(x) 
     
     # --- Bloque 3: Características Globales ---
     x = layers.Conv1D(256, kernel_size=4, padding='same', activation='relu')(x)
-    x = layers.GlobalAveragePooling1D()(x) # Reduce todo a un vector denso
+    x = layers.GlobalAveragePooling1D()(x) 
     
     # --- Clasificador ---
     x = layers.Dense(128, activation='relu')(x)
-    x = layers.Dropout(0.4)
+    x = layers.Dropout(0.4)(x) # Asegúrate que este también tenga (x)
     outputs = layers.Dense(num_classes, activation='softmax')(x)
     
     return models.Model(inputs, outputs)
