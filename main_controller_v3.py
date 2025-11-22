@@ -81,7 +81,7 @@ def decision_engine_v3(threat_type, confidence, eng):
 
     # --- LLAMADA A VISUALIZACIÓN V3 ---
     try:
-        eng.visualize_mitigation_v3(action_code, nargout=0)
+        eng.visualize_mitigation_v4(action_code, nargout=0)
     except Exception as e:
         print(f"⚠️ Error visual: {e}")
 
